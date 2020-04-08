@@ -260,16 +260,17 @@ const App = () => {
     const [rowCount, setRowCount] = useState(1);
     const [dbList, setDbList] = useState([]);
 
+    useEffect(() => {
+        if(isLoading)
+            window.$('#intro-modal').modal('show');
+    });
+
     if (isLoading) {
         axios.get('http://localhost:8000/api/')
             .then(res => {
                 setDbList(res.data);
             }).then(() => setIsLoading(false));
     }
-
-    useEffect(() => {
-        window.$('#intro-modal').modal('show');
-    });
 
     return (
         <div className="App">
